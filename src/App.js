@@ -1,7 +1,12 @@
+import Forca from "./Components/Forca";
+import Letras from "./Components/Letras";
+import GlobalStyle from "./GlobalStyle";
+
 export default function App() {
   return (
-    <div className="App">
-      <h1>JOGO DA FORCA</h1>
+    <div>
+      <Forca/>
+      <Letras/>
     </div>
   );
 }
