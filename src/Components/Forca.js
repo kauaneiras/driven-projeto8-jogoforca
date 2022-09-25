@@ -42,6 +42,10 @@ const RenderForca = styled.div`
     display: flex;
     justify-content: center;
     align-items: center;
-    width: 100%;
-    height: 100%;
+    margin-right: 300px;
+   
+    img{
+        width: 400px;
+        height: 100%;
+    }
 `

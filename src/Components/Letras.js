@@ -10,9 +10,10 @@ export default function Letras(){
     const [usedletters, setusedletters] = useState([])
 
 
-    function Clickerd(letra){
-        const newusedletters = [...usedletters, letra]
-        setusedletters(newusedletters)
+    function Clicked(letra){
+
+        const newusedletters = usedletters.includes(letra)?usedletters: [...usedletters, letra];
+        setusedletters(newusedletters);
         console.log(newusedletters);
         
     }
@@ -21,9 +22,9 @@ export default function Letras(){
         return(
         <Container>
             <RenderLetras>
-                {alfabeto.map((letra) => {
+                {alfabeto.map((letra, i) => {
                     return(
-                        <ButtonLetra onClick={()=> Clickerd(letra)}>{letra}</ButtonLetra>
+                        <ButtonLetra onClick={()=> Clicked(letra)} isClicked={usedletters.includes(letra)} key={i}>{letra}</ButtonLetra>
                     )
                 })}
             </RenderLetras>
@@ -51,8 +52,11 @@ const ButtonLetra = styled.button`
     width: 50px;
     height: 50px;
     border-radius: 5px;
-    border: 1px solid black;
-    background-color: #fff;
+    border: ${props => props.isClicked ? "1px solid #798595" : "1px solid #39739D"};
     margin: 5px;
+    font-size: 20px;
+    font-weight: 600;
+    color: ${props => props.isClicked ? "#798595" : "#39739D"};
+    background-color: ${(props) => props.isClicked === true ? "#9FAAB5" : "#E1ECF4"};
     
 `
