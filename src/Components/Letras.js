@@ -4,27 +4,27 @@ import { useState } from "react"
 
 const alfabeto = ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z"]
 
-export default function Letras(){
+export default function Letras(props){
 
     
-    const [usedletters, setusedletters] = useState([])
+    // const [usedletters, setusedletters] = useState([])
 
 
-    function Clicked(letra){
+    // function Clicked(letra){
 
-        const newusedletters = usedletters.includes(letra)?usedletters: [...usedletters, letra];
-        setusedletters(newusedletters);
-        console.log(newusedletters);
+    //     const newusedletters = usedletters.includes(letra)?usedletters: [...usedletters, letra];
+    //     setusedletters(newusedletters);
+    //     console.log(newusedletters);
         
-    }
-
+    // }
 
         return(
         <Container>
             <RenderLetras>
-                {alfabeto.map((letra, i) => {
+                {alfabeto.map((letra, j) => {
+                    
                     return(
-                        <ButtonLetra onClick={()=> Clicked(letra)} isClicked={usedletters.includes(letra)} key={i}>{letra}</ButtonLetra>
+                        <ButtonLetra onClick={(() => props.clicked(letra, j))} isClicked={props.usedletters.includes(letra)} key={j}>{letra}</ButtonLetra>
                     )
                 })}
             </RenderLetras>
