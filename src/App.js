@@ -7,13 +7,13 @@ import GlobalStyle from "./GlobalStyle";
 
 
 //---------   IMPORT IMAGES   ----------\\
-import forca0 from './assets/forca0.png'; // 0 erros
-import forca1 from './assets/forca1.png'; // 1 erro
-import forca2 from './assets/forca2.png'; // 2 erros
-import forca3 from './assets/forca3.png'; // 3 erros
-import forca4 from './assets/forca4.png'; // 4 erros
-import forca5 from './assets/forca5.png'; // 5 erros
-import forca6 from './assets/forca6.png'; // 6 erros
+import forca0 from './assets/forca0.png';
+import forca1 from './assets/forca1.png';
+import forca2 from './assets/forca2.png';
+import forca3 from './assets/forca3.png';
+import forca4 from './assets/forca4.png';
+import forca5 from './assets/forca5.png'; 
+import forca6 from './assets/forca6.png'; 
 //--------------------------------------\\
 
 
@@ -25,6 +25,7 @@ export default function App() {
   const [hideword, setHideword] = useState([]); // esse array armazena "_" para cada letra da palavra escolhida, e vai sendo substituido pelas letras certas
 
   function StartGame() {
+    setusedletters([]);
     setForca(0); // coloca o numero da forca em 0 (imagem da forca vazia)
     const randomword = Math.floor(Math.random() * Palavras.length); // sorteia uma palavra aleatória do vetor Palavras
     setChooseword(Palavras[randomword].split("")); // cria um array com cada letra da palavra sorteada. Se a palavra é "RATO", o array vai ser ["R", "A", "T", "O"]. isso devido ao método split
@@ -33,22 +34,23 @@ export default function App() {
 
 function Clicked(letra, j) { // essa função é chamada quando uma letra é clicada
     console.log(letra) // mostra no console a letra clicada
-    if (hideword.includes("_") && forca < 6) { // se a palavra ainda não foi descoberta e a forca ainda não está completa
-    {const showword = [...hideword]; // cria um novo array com o conteúdo do array hideword. os "..." são usados para criar um novo array atualizando o conteúdo do array anterior
-    const newusedletters = usedletters.includes(letra)? usedletters: [...usedletters, letra]; // se a letra clicada já foi usada, o array newusedletters recebe o array usedletters. Se a letra clicada não foi usada, o array newusedletters recebe o array usedletters com a letra clicada adicionada
-    setusedletters(newusedletters); // atualiza o array usedletters, setando o valor de newusedletters dentro de usedletters
-    console.log(newusedletters); // mostra no console o array newusedletters
+    if (hideword.includes("_")) { // se a palavra ainda não foi descoberta e a forca ainda não está completa
+      if(forca < 6){
+        const showword = [...hideword]; // cria um novo array com o conteúdo do array hideword. os "..." são usados para criar um novo array atualizando o conteúdo do array anterior
+        const newusedletters = usedletters.includes(letra)? usedletters: [...usedletters, letra]; // se a letra clicada já foi usada, o array newusedletters recebe o array usedletters. Se a letra clicada não foi usada, o array newusedletters recebe o array usedletters com a letra clicada adicionada
+        setusedletters(newusedletters); // atualiza o array usedletters, setando o valor de newusedletters dentro de usedletters
+        console.log(newusedletters); // mostra no console o array newusedletters
 
-    if (chooseword.includes(letra)) {// se a letra clicada está na palavra sorteada
-      for (let i = 0; i < chooseword.length; i++) { // percorre o array chooseword
-        if (chooseword[i] === letra) { // se a letra clicada é igual a letra do array chooseword, pega o indice e substitui o "_" correspondente no array showword
-          showword[i] = letra; // substitui o "_" pela letra correspondente no array showword
-        }
+        if (chooseword.includes(letra)) {// se a letra clicada está na palavra sorteada
+          for (let i = 0; i < chooseword.length; i++) { // percorre o array chooseword
+            if (chooseword[i] === letra) { // se a letra clicada é igual a letra do array chooseword, pega o indice e substitui o "_" correspondente no array showword
+              showword[i] = letra; // substitui o "_" pela letra correspondente no array showword
+            }
+          }
+          setHideword(showword);// atualiza o array hideword, setando o valor de showword dentro de hideword
+        } 
+        else if (!chooseword.includes(letra)) {setForca(forca + 1); console.log("FORCA", forca)}
       }
-      setHideword(showword);// atualiza o array hideword, setando o valor de showword dentro de hideword
-    } 
-    else {setForca(forca + 1); console.log("FORCA", forca)}// se a letra clicada não está na palavra sorteada, atualiza o numero da forca, adicionando +1 ao valor anterior
-  }
 }
   else{console.log("Não há palavra para acrescentar letra")} // se a palavra já foi descoberta ou a forca está completa, mostra no console "Não há palavra para acrescentar letra"
 }
@@ -74,12 +76,14 @@ function ChooseForca(){ // essa função é chamada para mostrar a imagem da for
         return <img src={forca5} alt="forca5"/>
     }
     else if (forca === 6) { // se o numero da forca é 6, mostra a imagem da forca com 6 erros
+
         return <img src={forca6} alt="forca6"/>
     }
     else { // se o numero da forca é maior que 6, mostra a imagem da forca com 6 erros
         return <img src={forca6} alt="forca6"/>
     }
 }
+
 
 const forcaa = ChooseForca(); // chama a função ChooseForca e armazena o resultado na constante forcaa
 
@@ -89,8 +93,8 @@ const forcaa = ChooseForca(); // chama a função ChooseForca e armazena o resul
         <AlignTopApp>
           <Forca>{forcaa}</Forca>
             <StartGameDiv>
-              <BottomSort onClick={StartGame}>Sortear Palavra</BottomSort>
-              <SortWordH1>{hideword}</SortWordH1>
+              <BottomSort onClick={StartGame} forca = {forca}>{(forca < 6)?"Sortear Palavra" : "Reiniciar Jogo"}</BottomSort>
+              <SortWordH1 forca = {forca}>{(forca < 6)? hideword : chooseword}</SortWordH1>
             </StartGameDiv>
         </AlignTopApp>
         <Letras clicked = {Clicked} usedletters={usedletters}/>
@@ -137,9 +141,9 @@ const StartGameDiv = styled.div`
 const SortWordH1 = styled.h1`
   font-size: 50px;
   font-weight: 600;
-  color: #39739D;
   letter-spacing: 0.1em;
   margin-top: 100px;
+  color: ${(props) => (props.forca < 6)?"#39739D":"red"};
 `
 
 const Forca = styled.div`

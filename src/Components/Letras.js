@@ -4,18 +4,15 @@ import { useState } from "react"
 
 const alfabeto = ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z"]
 
-export default function Letras(props){ //props = clickLetra (função) e letrasClicadas (array)
-    //clickLetra = função que recebe a letra clicada, essa função está no App.js	
-    //letrasClicadas = array que contém as letras que já foram clicadas, esse array está no App.js
-    //se a letra clicada estiver no array letrasClicadas, ela receberá cor diferente dentro do componente <ButtonLetra>
-
+export default function Letras(props){ 
+        
         return(
         <Container>
             <RenderLetras>
                 {alfabeto.map((letra, j) => {
                     
                     return(
-                        <ButtonLetra onClick={(() => props.clicked(letra, j))} isClicked={props.usedletters.includes(letra)} key={j}>{letra}</ButtonLetra>
+                        <ButtonLetra onClick={(() => props.clicked(letra, j))} isClicked={props.usedletters.includes(letra)} key={j} disabled={props.usedletters.includes(letra)}>{letra}</ButtonLetra>
                     )
                 })}
             </RenderLetras>
