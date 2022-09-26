@@ -12,7 +12,7 @@ export default function Letras(props){
                 {alfabeto.map((letra, j) => {
                     
                     return(
-                        <ButtonLetra onClick={(() => props.clicked(letra, j))} isClicked={props.usedletters.includes(letra)} key={j} disabled={props.usedletters.includes(letra)}>{letra}</ButtonLetra>
+                        <ButtonLetra onClick={(() => props.clicked(letra, j))} data-identifier="letter" isClicked={props.usedletters.includes(letra)} key={j} disabled={props.usedletters.includes(letra)}>{letra}</ButtonLetra>
                     )
                 })}
             </RenderLetras>

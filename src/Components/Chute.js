@@ -1,13 +1,15 @@
+import {useState} from 'react';
 import styled from "styled-components"
 
-export default function Chute(){
+export default function Chute(props){
+
     return (
         <Container>
             <Chutetext>Já sei a palavra!</Chutetext>
-            <ChuteInput type="text" placeholder="Digite a palavra"></ChuteInput>
-            <ChuteButton>Chutar</ChuteButton>
+            <ChuteInput data-identifier="type-guess" placeholder="Chute uma palavra" value={props.chute}onChange={(event) => props.writeguess(event.target.value)}></ChuteInput>
+            <ChuteButton data-identifier="guess-button" onClick={props.tryanswer}>Chutar</ChuteButton>
         </Container>
-    )  
+    )
 }
 
 const Container = styled.div`
