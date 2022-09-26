@@ -40,11 +40,15 @@ const ButtonLetra = styled.button`
     width: 50px;
     height: 50px;
     border-radius: 5px;
-    border: ${props => props.isClicked ? "1px solid #798595" : "1px solid #39739D"};
+    border: ${props => props.isClicked ? "2px solid #798595" : "2px solid #39739D"};
     margin: 5px;
     font-size: 20px;
     font-weight: 600;
     color: ${props => props.isClicked ? "#798595" : "#39739D"};
     background-color: ${(props) => props.isClicked === true ? "#9FAAB5" : "#E1ECF4"};
+    cursor: ${(props) => props.isClicked === true ? "default" : "pointer"};
+    &:hover {
+        background-color: ${(props) => props.isClicked === true ? "#9FAAB5" : "#D0E5F4"};
+      }
     
 `

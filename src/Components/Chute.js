@@ -20,19 +20,27 @@ const Container = styled.div`
     margin-top: 40px;
 `
 const Chutetext = styled.p`
-    font-size: 20px;
-    font-weight: 200;
+    font-family: 'Roboto', sans-serif;
+    font-size: 18px;
+    font-weight: 500;
     color: black;
     margin: 0px;
     margin-right: 10px;
 `
 const ChuteInput = styled.input`
-    width: 200px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    font-family: 'Roboto', sans-serif;
+    font-size: 14px;
+    width: 400px;
     height: 30px;
+    margin-left: 15px;
+    margin-right: 10px;
     border-radius: 5px;
     border: 1px solid #39739D;
 `
-
 const ChuteButton = styled.button`
     width: 80px;
     height: 35px;
@@ -41,4 +49,10 @@ const ChuteButton = styled.button`
     background-color: #E1ECF4;
     border: 1px solid #39739D;
     margin-left: 10px;
+    font-family: 'Roboto', sans-serif;
+    font-size: 16px;
+    font-weight: 800;
+    &:hover {
+        background-color: #D0E5F4;
+    }
 `

@@ -24,15 +24,13 @@ export default function App() {
   const [forca, setForca] = useState(0);
   const [hideword, setHideword] = useState([]);
   const [guess, setGuess] = useState("");
-  const [win, setWin] = useState("blue");
-  const [noSpecial, setNoSpecial] = useState("blue");
+  const [noSpecial, setNoSpecial] = useState("");
 
 
   console.log(guess)
 
 
   function StartGame() {
-    setWin("blue");
     setusedletters([]);
     setForca(0);
     setGuess("");
@@ -49,10 +47,10 @@ export default function App() {
         const showword = [...hideword];
         const newusedletters = usedletters.includes(letra) ? usedletters : [...usedletters, letra];
         setusedletters(newusedletters);
+
         console.log(newusedletters);
 
         if (noSpecial.includes(letra)) {
-
           for (let i = 0; i < noSpecial.length; i++) {
             if (noSpecial[i] === letra) {
               showword[i] = chooseword[i];
@@ -68,14 +66,12 @@ export default function App() {
 
   function Tryanswer() {
     if (guess === "") {
-      alert("Escreva algo");
-    } else if (guess === noSpecial) {
-      setWin("green");
+      alert("Escreva uma palavra para chutar");
+    } else if (guess === noSpecial || guess === chooseword.join("")) {
       setHideword([...chooseword]);
       setGuess("");
     } else {
       setForca(6);
-      setWin("red");
       setHideword([...chooseword]);
       setGuess("");
     }
@@ -111,11 +107,11 @@ export default function App() {
 
   function SetColorWord() {
     if (forca > 5) {
-      return "red";
+      return "#B70303";
     } else if (forca < 6 && hideword.includes("_")) {
-      return "blue";
+      return "#39739D";
     } else if (forca < 6 && !hideword.includes("_")) {
-      return "green";
+      return "#039614";
     }
   }
 
@@ -126,11 +122,12 @@ export default function App() {
 
   return (
     <div>
+      <GlobalStyle/>
       <AllItensAlignCenter>
         <AlignTopApp>
           <Forca>{forcaa}</Forca>
           <StartGameDiv>
-            <BottomSort onClick={StartGame} forca={forca} data-identifier="choose-word">{(forca < 6) ? "Escolher Palavra" : "Reiniciar Jogo"}</BottomSort>
+            <BottomSort onClick={StartGame} forca={forca} data-identifier="choose-word">{(forca < 6 && colorword !== "#039614") ? "Escolher Palavra" : "Reiniciar Jogo"}</BottomSort>
             <SortWordH1 data-identifier="word" forca={forca} style={{ color: `${colorword}` }}>{(forca < 6) ? hideword : chooseword}</SortWordH1>
           </StartGameDiv>
         </AlignTopApp>
@@ -153,27 +150,37 @@ const AlignTopApp = styled.div`
   display: flex;
   flex-direction: row;
   justify-content: space-between;
-  align-items: center;
+  align-items: space-between;
 `
 const BottomSort = styled.button`
-  width: 100px;
+  width: 200px;
   height: 50px;
   border-radius: 5px;
-  border: 1px solid #39739D;
+  border: 1px solid #129147;
   margin: 5px;
+  font-family: 'Roboto', sans-serif;
   font-size: 20px;
   font-weight: 600;
-  color: #39739D;
-  background-color: #E1ECF4;
+  color: white;
+  background-color: #27AE60;
+  cursor: pointer;
+  &:hover {
+      background-color: #129147;
+    }
 `
 const StartGameDiv = styled.div`
+  width: 400px;
+  height: 55vh;
+  margin-top: 30px;
+  margin-bottom: 30px;
   display: flex;
   flex-direction: column;
-  justify-content: center;
-  align-items: center;
+  justify-content: space-between;
+  align-items: flex-end;
 `
 const SortWordH1 = styled.h1`
-  font-size: 50px;
+  font-family: 'Roboto', sans-serif;
+  font-size: 45px;
   font-weight: 600;
   letter-spacing: 0.1em;
   margin-top: 100px;
@@ -182,39 +189,10 @@ const Forca = styled.div`
     display: flex;
     justify-content: center;
     align-items: center;
-    margin-right: 300px;
    
     img{
-        width: 400px;
-        height: 100%;
+        width: 350px;
+        height: 90%;
+        margin-bottom: 30px;
     }
-`
-const Container = styled.div`
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: row;
-    margin-top: 40px;
-`
-const Chutetext = styled.p`
-    font-size: 20px;
-    font-weight: 200;
-    color: black;
-    margin: 0px;
-    margin-right: 10px;
-`
-const ChuteInput = styled.input`
-    width: 200px;
-    height: 30px;
-    border-radius: 5px;
-    border: 1px solid #39739D;
-`
-const ChuteButton = styled.button`
-    width: 80px;
-    height: 35px;
-    color: #39739D;
-    border-radius: 5px;	
-    background-color: #E1ECF4;
-    border: 1px solid #39739D;
-    margin-left: 10px;
 `
