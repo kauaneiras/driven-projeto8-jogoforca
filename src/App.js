@@ -26,10 +26,6 @@ export default function App() {
   const [guess, setGuess] = useState("");
   const [noSpecial, setNoSpecial] = useState("");
 
-
-  console.log(guess)
-
-
   function StartGame() {
     setusedletters([]);
     setForca(0);
@@ -127,7 +123,7 @@ export default function App() {
         <AlignTopApp>
           <Forca>{forcaa}</Forca>
           <StartGameDiv>
-            <BottomSort onClick={StartGame} forca={forca} data-identifier="choose-word">{(forca < 6 && colorword !== "#039614") ? "Escolher Palavra" : "Reiniciar Jogo"}</BottomSort>
+            <BottomSort onClick={StartGame} forca={forca} data-identifier="choose-word">{(forca < 6 && colorword !== "#039614" || usedletters.length === 0) ? "Escolher Palavra" : "Reiniciar Jogo"}</BottomSort>
             <SortWordH1 data-identifier="word" forca={forca} style={{ color: `${colorword}` }}>{(forca < 6) ? hideword : chooseword}</SortWordH1>
           </StartGameDiv>
         </AlignTopApp>
