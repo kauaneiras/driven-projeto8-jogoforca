@@ -1,4 +1,16 @@
-# Getting Started with Create React App
+# Hangmangame
+
+This is a web browser game where a random word is drawn. The player must try to guess the letters of the word until he discovers the complete word. The player can miss up to 5 letters.
+
+
+## LANGUAGES AND TOOLS:
+[![My Skills](https://skills.thijs.gg/icons?i=react,styledcomponents,javascript&theme=light)](https://skills.thijs.gg)
+
+<img height="500" src="https://github.com/kauaneiras/projeto-jogoforca/blob/main/src/assets/JogodaForca%20(1).gif">
+
+
+##
+
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
